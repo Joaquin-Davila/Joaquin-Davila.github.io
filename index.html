@@ -4,10 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Joaquín Dávila Arenas - Portafolio</title>
+    <meta name="description" content="Portafolio de Joaquín Dávila Arenas, estudiante de Ingeniería en Sistemas de la Información.">
+    <script>document.documentElement.classList.add('js');</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
+        /* Paleta de la imagen de referencia, de más claro a más oscuro */
         :root {
             --mint-1: #cbe8dd;
             --mint-2: #a3e4cb;
@@ -16,423 +19,793 @@
             --mint-5: #3fb59d;
             --mint-6: #2e9b86;
 
-            --sidebar-bg: #1f6b5d;      
-            --sidebar-text: #e6f6f1;
-            --sidebar-muted: #cbe8dd;
-            --main-bg: #f3fbf8;         
-            --main-text: #174d43;
-            --body-text: #3a6b61;
-            --card-bg: #ffffff;
-            --line: #cbe8dd;
-            --accent-color: #2e9b86;
-            --accent-strong: #23806f;
-            --tag-bg: #e3f6ee;
-            --tag-text: #1f6b5d;
+            --bg: #f7fdfb;
+            --ink: #123f37;
+            --body: #3a6b61;
+            --line: #d6ece4;
+            --accent: #23806f;
+            --deep: #1f6b5d;
+
+            --display: "Bricolage Grotesque", "Segoe UI", Helvetica, Arial, sans-serif;
+            --text: "Figtree", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
+
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
 
         body {
             margin: 0;
-            font-family: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            display: flex;
-            min-height: 100vh;
-            background-color: var(--main-bg);
-            color: var(--main-text);
+            background: var(--bg);
+            color: var(--ink);
+            font-family: var(--text);
+            font-size: 1.0625rem;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
         }
 
-        a:focus-visible {
+        a { color: inherit; }
+        a:focus-visible, button:focus-visible {
             outline: 3px solid var(--mint-5);
             outline-offset: 3px;
+            border-radius: 4px;
         }
 
-        /*BARRA LATERAL IZQ*/
-        .sidebar {
-            width: 320px;
-            background-color: var(--sidebar-bg);
-            color: var(--sidebar-text);
-            padding: 50px 30px;
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            gap: 40px;
+        .wrap { width: min(1080px, 100% - 48px); margin-inline: auto; }
+
+        /* ---------- BARRA SUPERIOR (se oculta al bajar, reaparece al subir) ---------- */
+        .nav {
             position: fixed;
-            height: 100%;
-            overflow-y: auto;
+            inset: 0 0 auto 0;
+            z-index: 50;
+            background: rgba(247, 253, 251, 0.82);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--line);
+            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
         }
+        .nav.hide { transform: translateY(-100%); }
 
-        .profile-header h1 {
-            margin: 0 0 5px 0;
-            font-size: 1.8em;
-            font-weight: 800;
-            color: #ffffff;
-            letter-spacing: 0.2px;
-        }
-
-        .profile-header p {
-            margin: 0;
-            color: var(--mint-2);
-            font-size: 0.95em;
-        }
-
-        .sidebar-section h3 {
-            font-size: 0.85em;
-            font-weight: 600;
-            color: var(--mint-1);
-            margin-bottom: 15px;
-            border-bottom: 1px solid rgba(203, 232, 221, 0.35);
-            padding-bottom: 8px;
-        }
-
-        .sidebar-section p, .sidebar-section a {
-            font-size: 0.9em;
-            color: var(--sidebar-muted);
-            margin: 5px 0;
-            text-decoration: none;
-            display: block;
-        }
-
-        .sidebar-section a:hover {
-            color: #ffffff;
-            text-decoration: underline;
-        }
-
-        .tech-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .tech-pill {
-            background-color: rgba(255, 255, 255, 0.12);
-            color: var(--sidebar-text);
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.8em;
-        }
-
-        /*CONTENIDO PRINCIPAL DERE*/
-        .main-content {
-            margin-left: 320px;
-            padding: 60px 80px;
-            max-width: 1200px;
-            box-sizing: border-box;
-            flex: 1;
-        }
-
-        .main-title {
-            font-size: 3.5em;
-            font-weight: 800;
-            color: var(--main-text);
-            margin: 0 0 30px 0;
-            line-height: 1.1;
-        }
-
-        .about-text {
-            font-size: 1.1em;
-            line-height: 1.8;
-            color: var(--body-text);
-            margin-bottom: 40px;
-            max-width: 72ch;
-        }
-
-        .section-title {
-            font-size: 1.8em;
-            color: var(--main-text);
-            margin-bottom: 25px;
-            margin-top: 50px;
+        .nav-inner {
             display: flex;
             align-items: center;
-            gap: 10px;
-            border-bottom: 2px solid var(--line);
-            padding-bottom: 10px;
+            justify-content: space-between;
+            height: 64px;
         }
 
-        .skills-list {
-            list-style: none;
-            padding: 0;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
-            margin-bottom: 50px;
+        .brand {
+            font-family: var(--display);
+            font-weight: 800;
+            font-size: 1.15rem;
+            letter-spacing: -0.01em;
+            text-decoration: none;
         }
 
-        .skills-list li {
-            background-color: var(--mint-1);
-            color: var(--main-text);
-            padding: 12px 20px;
-            border-radius: 8px;
-            font-size: 0.95em;
+        .links { display: flex; gap: 28px; }
+        .links a {
+            position: relative;
+            font-size: 0.95rem;
             font-weight: 500;
-        }
-
-        /*PROYECTOS*/
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 25px;
-        }
-
-        .project-card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--line);
-            border-radius: 12px;
-            padding: 25px;
             text-decoration: none;
-            color: inherit;
-            display: flex;
-            flex-direction: column;
-            transition: border-color 0.2s ease;
+            color: var(--body);
+            padding: 6px 0;
+            transition: color 0.2s;
         }
-
-        .project-card:hover {
-            border-color: var(--mint-5);
+        .links a::after {
+            content: "";
+            position: absolute;
+            left: 0; right: 0; bottom: 0;
+            height: 2px;
+            background: var(--mint-5);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
         }
+        .links a:hover, .links a.active { color: var(--ink); }
+        .links a:hover::after, .links a.active::after { transform: scaleX(1); }
 
-        .project-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-
-        .project-icon { font-size: 1.5em; }
-        .project-title { font-size: 1.2em; font-weight: 700; margin: 0; color: var(--main-text); }
-        .project-desc { font-size: 0.95em; color: var(--body-text); line-height: 1.6; margin-bottom: 20px; flex-grow: 1; }
-        .project-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; }
-        .tag { background-color: var(--tag-bg); color: var(--tag-text); padding: 4px 10px; border-radius: 6px; font-size: 0.75em; font-weight: 600; }
-
-        /*BLOGS*/
-        .blog-post {
-            background-color: var(--card-bg);
+        .menu-btn {
+            display: none;
+            background: none;
             border: 1px solid var(--line);
-            border-radius: 12px;
-            padding: 30px;
-            margin-bottom: 30px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        @media (min-width: 900px) {
-            .blog-post { flex-direction: row; align-items: flex-start; }
-            .blog-content { flex: 2; }
-            .blog-image { flex: 1; text-align: center; }
-        }
-
-        .blog-post h3 {
-            margin: 0 0 15px 0;
-            font-size: 1.5em;
-            color: var(--main-text);
-        }
-
-        .blog-post h4 {
-            margin: 22px 0 8px 0;
-            font-size: 1em;
-            font-weight: 700;
-            color: var(--accent-strong);
-        }
-
-        .blog-post p {
-            color: var(--body-text);
-            line-height: 1.7;
-            margin: 0 0 15px 0;
-            font-size: 0.95em;
-        }
-
-        .blog-post img {
-            max-width: 100%;
             border-radius: 8px;
-            margin-bottom: 15px;
+            padding: 6px 14px;
+            font: inherit;
+            font-size: 0.9rem;
+            color: var(--ink);
+            cursor: pointer;
         }
 
-        .btn-link {
+        .progress {
+            position: absolute;
+            left: 0; bottom: -1px;
+            height: 2px;
+            width: 100%;
+            background: var(--mint-5);
+            transform: scaleX(0);
+            transform-origin: left;
+        }
+
+        @media (max-width: 760px) {
+            .menu-btn { display: block; }
+            .links {
+                position: absolute;
+                top: 64px; left: 0; right: 0;
+                flex-direction: column;
+                gap: 0;
+                padding: 8px 24px 16px;
+                background: var(--bg);
+                border-bottom: 1px solid var(--line);
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(-8px);
+                transition: opacity 0.25s, transform 0.25s, visibility 0.25s;
+            }
+            .links.open { opacity: 1; visibility: visible; transform: none; }
+            .links a { padding: 12px 0; }
+            .links a::after { display: none; }
+        }
+
+        /* ---------- INICIO ---------- */
+        .hero {
+            position: relative;
+            min-height: 100svh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 120px 0 72px;
+            overflow: hidden;
+        }
+
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(48px);
+            opacity: 0.7;
+            pointer-events: none;
+            animation: drift 16s ease-in-out infinite alternate;
+        }
+        .blob.b1 { width: 460px; height: 460px; right: -80px; top: 8%; background: linear-gradient(135deg, var(--mint-2), var(--mint-4)); }
+        .blob.b2 { width: 340px; height: 340px; right: 22%; bottom: -60px; background: linear-gradient(135deg, var(--mint-1), var(--mint-3)); animation-duration: 20s; animation-delay: -6s; }
+        .blob.b3 { width: 220px; height: 220px; right: 4%; bottom: 18%; background: var(--mint-5); opacity: 0.35; animation-duration: 13s; animation-delay: -3s; }
+
+        @keyframes drift {
+            from { transform: translate3d(0, 0, 0) scale(1); }
+            to   { transform: translate3d(-40px, 36px, 0) scale(1.08); }
+        }
+
+        .hero .wrap { position: relative; }
+
+        .rise { animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both; animation-delay: var(--d, 0s); }
+        @keyframes rise {
+            from { opacity: 0; transform: translateY(28px); }
+            to   { opacity: 1; transform: none; }
+        }
+
+        .intro { margin: 0 0 18px; color: var(--accent); font-weight: 600; font-size: 1.05rem; }
+
+        h1.name {
+            margin: 0;
+            font-family: var(--display);
+            font-weight: 800;
+            font-size: clamp(2.8rem, 9vw, 6.4rem);
+            line-height: 0.98;
+            letter-spacing: -0.035em;
+            max-width: 12ch;
+        }
+
+        .aspire {
+            margin: 28px 0 0;
+            font-size: clamp(1.15rem, 2.6vw, 1.6rem);
+            color: var(--body);
+            max-width: 26ch;
+        }
+        .aspire strong { color: var(--ink); font-weight: 600; }
+
+        .swap { display: grid; }
+        .swap span { grid-area: 1 / 1; }
+        .swap .r1 { animation: swapA 8s ease-in-out infinite; }
+        .swap .r2 { animation: swapB 8s ease-in-out infinite; }
+        @keyframes swapA {
+            0%, 44%   { opacity: 1; transform: none; }
+            50%, 94%  { opacity: 0; transform: translateY(-12px); }
+            100%      { opacity: 1; transform: none; }
+        }
+        @keyframes swapB {
+            0%, 44%   { opacity: 0; transform: translateY(12px); }
+            50%, 94%  { opacity: 1; transform: none; }
+            100%      { opacity: 0; transform: translateY(12px); }
+        }
+
+        .hero-links { display: flex; gap: 14px; margin-top: 40px; flex-wrap: wrap; }
+        .btn {
             display: inline-block;
-            background-color: var(--accent-strong);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 6px;
-            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 999px;
             font-weight: 600;
-            font-size: 0.9em;
-            transition: background-color 0.2s;
+            font-size: 0.95rem;
+            text-decoration: none;
+            border: 1px solid var(--accent);
+            transition: background-color 0.25s, color 0.25s, transform 0.25s;
+        }
+        .btn.fill { background: var(--accent); color: #fff; }
+        .btn.fill:hover { background: var(--deep); border-color: var(--deep); }
+        .btn.ghost { color: var(--accent); }
+        .btn.ghost:hover { background: var(--mint-1); }
+
+        /* ---------- FRANJA DE TECNOLOGÍAS ---------- */
+        .marquee {
+            overflow: hidden;
+            border-block: 1px solid var(--line);
+            padding: 18px 0;
+            background: rgba(203, 232, 221, 0.35);
+        }
+        .track {
+            display: flex;
+            width: max-content;
+            animation: scroll 30s linear infinite;
+        }
+        .marquee:hover .track { animation-play-state: paused; }
+        .track span {
+            font-family: var(--display);
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--deep);
+            padding-right: 56px;
+            white-space: nowrap;
+        }
+        @keyframes scroll { to { transform: translateX(-50%); } }
+
+        /* ---------- SECCIONES ---------- */
+        .section {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: clamp(24px, 5vw, 72px);
+            padding: clamp(64px, 10vw, 112px) 0;
+            border-top: 1px solid var(--line);
+            scroll-margin-top: 0;
+        }
+        .section:first-of-type { border-top: 0; }
+        .section > h2 {
+            margin: 0;
+            font-family: var(--display);
+            font-weight: 700;
+            font-size: 1.5rem;
+            letter-spacing: -0.01em;
+            align-self: start;
+            position: sticky;
+            top: 96px;
+        }
+        @media (max-width: 820px) {
+            .section { grid-template-columns: 1fr; gap: 28px; }
+            .section > h2 { position: static; }
         }
 
-        .btn-link:hover {
-            background-color: var(--sidebar-bg);
+        .about p { margin: 0 0 18px; color: var(--body); max-width: 62ch; font-size: 1.15rem; }
+        .about p:last-child { margin-bottom: 0; }
+        .about .role { color: var(--ink); font-weight: 600; }
+
+        /* Habilidades */
+        .skills { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; }
+        .skills li {
+            padding: 18px 20px;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            font-weight: 500;
+            color: var(--ink);
+            background: #fff;
+            transition: background-color 0.25s, border-color 0.25s;
+        }
+        .skills li:hover { background: var(--mint-1); border-color: var(--mint-4); }
+
+        /* Educación (es una secuencia, por eso va en línea de tiempo) */
+        .timeline { list-style: none; margin: 0; padding: 0 0 0 28px; position: relative; }
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 5px; top: 8px; bottom: 8px;
+            width: 2px;
+            background: var(--mint-3);
+            transform: scaleY(0);
+            transform-origin: top;
+            transition: transform 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .timeline.in::before, html:not(.js) .timeline::before { transform: scaleY(1); }
+        .timeline li { position: relative; padding-bottom: 36px; }
+        .timeline li:last-child { padding-bottom: 0; }
+        .timeline li::before {
+            content: "";
+            position: absolute;
+            left: -28px; top: 8px;
+            width: 12px; height: 12px;
+            border-radius: 50%;
+            background: var(--bg);
+            border: 2px solid var(--mint-5);
+        }
+        .timeline li.now::before {
+            background: var(--mint-6);
+            animation: pulse 2.4s ease-out infinite;
+        }
+        @keyframes pulse {
+            0%   { box-shadow: 0 0 0 0 rgba(63, 181, 157, 0.55); }
+            100% { box-shadow: 0 0 0 14px rgba(63, 181, 157, 0); }
+        }
+        .timeline .level { margin: 0; font-size: 0.9rem; color: var(--accent); font-weight: 600; }
+        .timeline .school { margin: 2px 0 0; font-family: var(--display); font-weight: 700; font-size: 1.35rem; line-height: 1.3; }
+        .timeline .detail { margin: 2px 0 0; color: var(--body); font-size: 0.98rem; }
+
+        /* Proyectos */
+        .rows { border-top: 1px solid var(--line); }
+        .row {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 8px 32px;
+            align-items: center;
+            padding: 26px 12px;
+            border-bottom: 1px solid var(--line);
+            text-decoration: none;
+            transition: background-color 0.25s;
+        }
+        .row:hover { background: rgba(203, 232, 221, 0.45); }
+        .row h3 { margin: 0; font-family: var(--display); font-weight: 700; font-size: 1.35rem; line-height: 1.3; transition: transform 0.3s ease; }
+        .row:hover h3 { transform: translateX(8px); }
+        .row p { margin: 4px 0 0; color: var(--body); font-size: 0.98rem; max-width: 56ch; }
+        .row .tags { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+        .tag { padding: 3px 12px; border-radius: 999px; background: var(--mint-1); color: var(--deep); font-size: 0.8rem; font-weight: 600; }
+        .row .go { grid-column: 1 / -1; font-size: 0.85rem; font-weight: 600; color: var(--accent); opacity: 0; transform: translateX(-6px); transition: opacity 0.25s, transform 0.25s; }
+        .row:hover .go, .row:focus-visible .go { opacity: 1; transform: none; }
+        @media (max-width: 620px) {
+            .row { grid-template-columns: 1fr; }
+            .row .tags { justify-content: flex-start; }
+            .row .go { opacity: 1; transform: none; }
         }
 
-        /* Responsivo */
-        @media (max-width: 900px) {
-            body { flex-direction: column; }
-            .sidebar { width: 100%; position: relative; height: auto; padding: 40px 20px; }
-            .main-content { margin-left: 0; padding: 40px 20px; }
-            .main-title { font-size: 2.6em; }
+        /* Blogs */
+        .blog + .blog { margin-top: 80px; padding-top: 80px; border-top: 1px solid var(--line); }
+        .blog figure {
+            margin: 0 0 32px;
+            aspect-ratio: 16 / 9;
+            border-radius: 14px;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--mint-1), var(--mint-3));
+        }
+        .blog figure img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.8s ease; }
+        .blog figure:hover img { transform: scale(1.03); }
+        .blog h3 { margin: 0 0 28px; font-family: var(--display); font-weight: 800; font-size: clamp(1.7rem, 4vw, 2.3rem); line-height: 1.15; letter-spacing: -0.02em; }
+
+        .steps { list-style: none; margin: 0; padding: 0; counter-reset: step; }
+        .steps li { counter-increment: step; position: relative; padding: 0 0 26px 52px; }
+        .steps li::before {
+            content: counter(step);
+            position: absolute;
+            left: 0; top: 0;
+            width: 32px; height: 32px;
+            border-radius: 50%;
+            background: var(--mint-1);
+            color: var(--deep);
+            font-weight: 700;
+            font-size: 0.9rem;
+            display: grid;
+            place-items: center;
+        }
+        .steps h4 { margin: 3px 0 6px; font-family: var(--display); font-weight: 700; font-size: 1.1rem; }
+        .steps p { margin: 0; color: var(--body); max-width: 66ch; font-size: 1rem; }
+
+        /* Contacto */
+        .contact-lead { margin: 0 0 32px; color: var(--body); font-size: 1.15rem; max-width: 46ch; }
+        .contact-list { display: grid; gap: 20px; }
+        .contact-item { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-bottom: 20px; border-bottom: 1px solid var(--line); }
+        .contact-item small { display: block; color: var(--accent); font-weight: 600; font-size: 0.9rem; }
+        .contact-item a.value {
+            font-family: var(--display);
+            font-weight: 700;
+            font-size: clamp(1.25rem, 3.4vw, 1.9rem);
+            text-decoration: none;
+            overflow-wrap: anywhere;
+            background: linear-gradient(var(--mint-5), var(--mint-5)) 0 100% / 0 2px no-repeat;
+            transition: background-size 0.35s ease;
+        }
+        .contact-item a.value:hover { background-size: 100% 2px; }
+        .copy {
+            font: inherit;
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 8px 18px;
+            border-radius: 999px;
+            border: 1px solid var(--mint-4);
+            background: transparent;
+            color: var(--deep);
+            cursor: pointer;
+            transition: background-color 0.25s, color 0.25s;
+        }
+        .copy:hover { background: var(--mint-1); }
+        .copy.done { background: var(--mint-6); border-color: var(--mint-6); color: #fff; }
+
+        footer { padding: 36px 0 48px; border-top: 1px solid var(--line); color: var(--body); font-size: 0.9rem; }
+
+        /* Aparición al hacer scroll */
+        .js .reveal {
+            opacity: 0;
+            transform: translateY(26px);
+            transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+            transition-delay: calc(var(--i, 0) * 80ms);
+        }
+        .js .reveal.in { opacity: 1; transform: none; }
+
+        /* Movimiento reducido */
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after { animation: none !important; transition: none !important; }
+            .js .reveal { opacity: 1; transform: none; }
+            .timeline::before { transform: scaleY(1); }
+            .swap { display: block; }
+            .swap .r1, .swap .r2 { opacity: 1; transform: none; }
+            .swap .r2::before { content: " o "; }
+            .swap span { display: inline; }
+            .track { flex-wrap: wrap; width: auto; padding: 0 24px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- BARRA LATERAL -->
-    <aside class="sidebar">
-        <div class="profile-header">
-            <h1>Joaquín Dávila Arenas</h1>
-            <p>Ing. en Sistemas de la Información</p>
+    <!-- BARRA SUPERIOR -->
+    <header class="nav" id="nav">
+        <div class="wrap nav-inner">
+            <a href="#inicio" class="brand">Joaquín Dávila</a>
+            <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="links">Menú</button>
+            <nav class="links" id="links" aria-label="Principal">
+                <a href="#sobre-mi">Sobre mí</a>
+                <a href="#habilidades">Habilidades</a>
+                <a href="#educacion">Educación</a>
+                <a href="#proyectos">Proyectos</a>
+                <a href="#blogs">Blogs</a>
+                <a href="#contacto">Contacto</a>
+            </nav>
         </div>
+        <div class="progress" id="progress"></div>
+    </header>
 
-        <div class="sidebar-section">
-            <h3>Contacto</h3>
-            <a href="https://github.com/Joaquin-Davila" target="_blank" rel="noopener">🔗 github.com/Joaquin-Davila</a>
-        </div>
+    <main>
+        <!-- INICIO -->
+        <section class="hero" id="inicio">
+            <div class="blob b1"></div>
+            <div class="blob b2"></div>
+            <div class="blob b3"></div>
+            <div class="wrap">
+                <p class="intro rise" style="--d:.05s">Estudiante de Ingeniería en Sistemas de la Información</p>
+                <h1 class="name rise" style="--d:.15s">Joaquín Dávila Arenas</h1>
+                <p class="aspire rise" style="--d:.3s" aria-label="Aspiro a ser desarrollador de base de datos o administrador de redes">
+                    Aspiro a ser
+                    <strong class="swap" aria-hidden="true">
+                        <span class="r1">desarrollador de base de datos</span>
+                        <span class="r2">administrador de redes</span>
+                    </strong>
+                </p>
+                <div class="hero-links rise" style="--d:.45s">
+                    <a class="btn fill" href="#proyectos">Ver proyectos</a>
+                    <a class="btn ghost" href="#contacto">Contactarme</a>
+                </div>
+            </div>
+        </section>
 
-        <div class="sidebar-section">
-            <h3>Tecnologías</h3>
-            <div class="tech-grid">
-                <span class="tech-pill">Python</span>
-                <span class="tech-pill">Java</span>
-                <span class="tech-pill">Flask</span>
-                <span class="tech-pill">SQL</span>
-                <span class="tech-pill">Docker</span>
-                <span class="tech-pill">VirtualBox</span>
-                <span class="tech-pill">Canva</span>
-                <span class="tech-pill">Redes WLAN</span>
+        <!-- TECNOLOGÍAS -->
+        <div class="marquee" aria-label="Tecnologías: Python, Java, Flask, SQL, Docker, VirtualBox, Canva y redes WLAN">
+            <div class="track" aria-hidden="true">
+                <span>Python</span><span>Java</span><span>Flask</span><span>SQL</span><span>Docker</span><span>VirtualBox</span><span>Canva</span><span>Redes WLAN</span>
+                <span>Python</span><span>Java</span><span>Flask</span><span>SQL</span><span>Docker</span><span>VirtualBox</span><span>Canva</span><span>Redes WLAN</span>
             </div>
         </div>
 
-        <div class="sidebar-section">
-            <h3>Formación</h3>
-            <p><strong>Ing. en Sistemas de la Información</strong></p>
-            <p>Universidad de Sonora</p>
-            <p style="font-size: 0.85em;">En curso</p>
+        <div class="wrap">
+
+            <!-- SOBRE MÍ -->
+            <section class="section" id="sobre-mi">
+                <h2 class="reveal">Sobre mí</h2>
+                <div class="about reveal" style="--i:1">
+                    <p>Soy estudiante de Ingeniería en Sistemas de la Información y <span class="role">aspiro a desempeñarme como desarrollador de base de datos o administrador de redes.</span></p>
+                    <p>Me interesan las redes domésticas, el diseño de interfaces front end, el desarrollo de bases de datos y la virtualización de servidores con contenedores. Me gusta entender cómo se conectan los dispositivos en una red, diseñar pantallas claras para quien las usa y organizar la información en bases de datos bien estructuradas. También trabajo con máquinas virtuales y contenedores para montar y probar entornos de forma ordenada.</p>
+                </div>
+            </section>
+
+            <!-- HABILIDADES -->
+            <section class="section" id="habilidades">
+                <h2 class="reveal">Habilidades</h2>
+                <ul class="skills">
+                    <li class="reveal" style="--i:1">Configuración de redes domésticas</li>
+                    <li class="reveal" style="--i:2">Redes inalámbricas WLAN</li>
+                    <li class="reveal" style="--i:3">Diseño de interfaces front end</li>
+                    <li class="reveal" style="--i:4">Desarrollo de bases de datos (SQL)</li>
+                    <li class="reveal" style="--i:5">Virtualización de servidores</li>
+                    <li class="reveal" style="--i:6">Contenedores con Docker</li>
+                </ul>
+            </section>
+
+            <!-- EDUCACIÓN -->
+            <section class="section" id="educacion">
+                <h2 class="reveal">Educación</h2>
+                <ol class="timeline reveal" id="timeline">
+                    <li>
+                        <p class="level">Primaria</p>
+                        <p class="school">IMARC Ellen C. Long</p>
+                    </li>
+                    <li>
+                        <p class="level">Secundaria</p>
+                        <p class="school">Colegio Bicultural Cananea</p>
+                    </li>
+                    <li>
+                        <p class="level">Preparatoria</p>
+                        <p class="school">Colegio Regis La Salle</p>
+                    </li>
+                    <li class="now">
+                        <p class="level">Nivel actual</p>
+                        <p class="school">Universidad de Sonora (UNISON)</p>
+                        <p class="detail">Ingeniería en Sistemas de la Información, en curso</p>
+                    </li>
+                </ol>
+            </section>
+
+            <!-- PROYECTOS -->
+            <section class="section" id="proyectos">
+                <h2 class="reveal">Proyectos</h2>
+                <div class="rows reveal" style="--i:1">
+
+                    <a class="row" href="https://github.com/JavierBernal06/crud-gestion-materiales-mina-java" target="_blank" rel="noopener">
+                        <div>
+                            <h3>Gestión de Materiales de Mina</h3>
+                            <p>Sistema en Java para administrar el inventario de materiales de una mina mediante operaciones CRUD: alta, consulta, modificación y baja de registros.</p>
+                        </div>
+                        <div class="tags"><span class="tag">Java</span><span class="tag">CRUD</span></div>
+                        <span class="go">Ver en GitHub</span>
+                    </a>
+
+                    <a class="row" href="https://github.com/JavierBernal06/calculadora-coordenadas-java" target="_blank" rel="noopener">
+                        <div>
+                            <h3>Calculadora de Coordenadas</h3>
+                            <p>Programa en Java que trabaja con coordenadas y realiza cálculos a partir de ellas.</p>
+                        </div>
+                        <div class="tags"><span class="tag">Java</span><span class="tag">Matemáticas</span></div>
+                        <span class="go">Ver en GitHub</span>
+                    </a>
+
+                    <a class="row" href="https://github.com/Joaquin-Davila/Men-de-funciones-iterativas-en-Java-" target="_blank" rel="noopener">
+                        <div>
+                            <h3>Funciones Iterativas en Java</h3>
+                            <p>Menú interactivo en Java que reúne distintas funciones resueltas con ciclos e iteraciones.</p>
+                        </div>
+                        <div class="tags"><span class="tag">Java</span><span class="tag">Lógica</span></div>
+                        <span class="go">Ver en GitHub</span>
+                    </a>
+
+                    <a class="row" href="https://github.com/Joaquin-Davila/Actividad-4-Generador-de-alumnos" target="_blank" rel="noopener">
+                        <div>
+                            <h3>Generador de Alumnos BD</h3>
+                            <p>Generador de registros de alumnos pensado para poblar y probar una base de datos.</p>
+                        </div>
+                        <div class="tags"><span class="tag">Base de Datos</span><span class="tag">SQL</span></div>
+                        <span class="go">Ver en GitHub</span>
+                    </a>
+
+                    <a class="row" href="https://github.com/Joaquin-Davila/Juego-del-Gato" target="_blank" rel="noopener">
+                        <div>
+                            <h3>Juego del Gato en Java</h3>
+                            <p>Versión del juego del gato (tres en línea) programada en Java, con turnos y detección de ganador.</p>
+                        </div>
+                        <div class="tags"><span class="tag">Java</span><span class="tag">Lógica</span></div>
+                        <span class="go">Ver en GitHub</span>
+                    </a>
+
+                </div>
+            </section>
+
+            <!-- BLOGS -->
+            <section class="section" id="blogs">
+                <h2 class="reveal">Blogs</h2>
+                <div>
+
+                    <article class="blog reveal">
+                        <figure>
+                            <img src="edukacion.jpg" alt="Pantalla de inicio del juego Edukacion Mortal" onerror="this.style.display='none'">
+                        </figure>
+                        <h3>Prototipo UI: "Edukacion Mortal"</h3>
+                        <ol class="steps">
+                            <li>
+                                <h4>Descripción</h4>
+                                <p>Diseño conceptual y maquetado de interfaz para un videojuego de peleas 2D en estilo pixel art, protagonizado por personajes basados en estudiantes de preparatorias de Sonora, como el CBTIS.</p>
+                            </li>
+                            <li>
+                                <h4>Requerimientos del cliente</h4>
+                                <p>Se necesitaba establecer una dirección de arte clara y diseñar los flujos de interacción del usuario, desde las pantallas de selección y los menús de inicio hasta los escenarios de combate, de modo que reflejaran la identidad local. La arquitectura de información debía ser sencilla y estar pensada para consolas y PC.</p>
+                            </li>
+                            <li>
+                                <h4>¿Cómo se diseñó la solución?</h4>
+                                <p>Se planteó una arquitectura de información simple y se definió la disposición de los botones interactivos (Jugar / Menú). También se estructuró la jerarquía visual para que el logotipo y los luchadores destacaran sobre los fondos detallados de las escuelas.</p>
+                            </li>
+                            <li>
+                                <h4>¿Cómo se implementó la solución?</h4>
+                                <p>La construcción gráfica y el ensamblaje de los componentes se hicieron en Canva. Ahí se organizaron las capas de los sprites, la tipografía retro y los elementos del HUD para simular la vista real del motor de juego.</p>
+                            </li>
+                            <li>
+                                <h4>¿Cuál fue el resultado?</h4>
+                                <p>Un mockup detallado que muestra la experiencia de usuario y la estética final del juego, y que sirve como documento visual de referencia para la futura etapa de programación.</p>
+                                <p style="margin-top:14px"><a class="btn fill" href="https://canva.link/2753ld1rcnxi7c6" target="_blank" rel="noopener">Ver diseño en Canva</a></p>
+                            </li>
+                        </ol>
+                    </article>
+
+                    <article class="blog reveal">
+                        <figure>
+                            <img src="sonora-aventuras.jpg" alt="Interfaz web de Sonora Aventuras" onerror="this.style.display='none'">
+                        </figure>
+                        <h3>Prototipo Web: "Sonora Aventuras"</h3>
+                        <ol class="steps">
+                            <li>
+                                <h4>Descripción</h4>
+                                <p>Diseño de una interfaz web para una plataforma turística del estado de Sonora, con viajes en autobús por los pueblos mágicos de la región. Tiene una interfaz de usuario y otra de administrador. El usuario explora destinos como el Desierto de Altar y Puerto Peñasco, consulta su próxima salida y accede a su boleto con código QR.</p>
+                            </li>
+                            <li>
+                                <h4>Requerimientos del cliente</h4>
+                                <p>La plataforma debía permitir al usuario consultar todos los viajes y comprar boletos, y reservar el transporte y el hotel en un mismo proceso. Del lado del administrador, debía permitir gestionar los viajes, las fechas, los hoteles y los camiones, con su capacidad y sus ventas.</p>
+                            </li>
+                            <li>
+                                <h4>¿Cómo se diseñó la solución?</h4>
+                                <p>Se separaron las dos vistas según el tipo de usuario. La del usuario recomienda viajes en autobús y concentra el boleto y el hotel en un solo flujo. La del administrador reúne la gestión de paseos, autobuses y reservas. En ambas se buscó una navegación sencilla y un estilo visual coherente con la marca.</p>
+                            </li>
+                            <li>
+                                <h4>¿Cómo se implementó la solución?</h4>
+                                <p>Los requerimientos se tradujeron en pantallas claras, que se presentaron como un prototipo de la interfaz web: una ventana de administrador para los viajes, fechas, hoteles y camiones, y una ventana de usuario para consultar viajes y comprar boletos.</p>
+                            </li>
+                            <li>
+                                <h4>¿Cuál fue el resultado?</h4>
+                                <p>Un prototipo con las dos interfaces que permite revisar el flujo completo antes de desarrollar. Con este proyecto aprendí a distinguir tipos de usuario, a diseñar una vista para cada uno y a pensar en el sistema completo, no solo en el código.</p>
+                            </li>
+                        </ol>
+                    </article>
+
+                </div>
+            </section>
+
+            <!-- CONTACTO -->
+            <section class="section" id="contacto">
+                <h2 class="reveal">Contacto</h2>
+                <div>
+                    <p class="contact-lead reveal">Si quieres hablar de un proyecto, una oportunidad o tienes alguna duda, escríbeme o llámame.</p>
+                    <div class="contact-list">
+                        <div class="contact-item reveal" style="--i:1">
+                            <div>
+                                <small>Correo personal</small>
+                                <a class="value" href="mailto:joaquindaviladavila@gmail.com">joaquindaviladavila@gmail.com</a>
+                            </div>
+                            <button class="copy" data-copy="joaquindaviladavila@gmail.com" type="button">Copiar correo</button>
+                        </div>
+                        <div class="contact-item reveal" style="--i:2">
+                            <div>
+                                <small>Teléfono</small>
+                                <a class="value" href="tel:6624627393">662 462 7393</a>
+                            </div>
+                            <button class="copy" data-copy="6624627393" type="button">Copiar número</button>
+                        </div>
+                        <div class="contact-item reveal" style="--i:3">
+                            <div>
+                                <small>GitHub</small>
+                                <a class="value" href="https://github.com/Joaquin-Davila" target="_blank" rel="noopener">github.com/Joaquin-Davila</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
         </div>
-    </aside>
-
-    <!-- CONTENIDO PRINCIPAL -->
-    <main class="main-content">
-
-        <h1 class="main-title">Joaquín Dávila Arenas</h1>
-
-        <p class="about-text">
-            Estudiante de Ingeniería en Sistemas de la Información con interés en las redes domésticas, el diseño de interfaces front end, el desarrollo de bases de datos y la virtualización de servidores con contenedores. Me gusta entender cómo se conectan los dispositivos de una red, diseñar pantallas claras para quien las usa y organizar la información en bases de datos bien estructuradas. También trabajo con máquinas virtuales y contenedores para montar y probar entornos de forma ordenada.
-        </p>
-
-        <h2 class="section-title">Habilidades</h2>
-        <ul class="skills-list">
-            <li>Configuración de redes domésticas</li>
-            <li>Redes inalámbricas WLAN</li>
-            <li>Diseño de interfaces front end</li>
-            <li>Desarrollo de bases de datos (SQL)</li>
-            <li>Virtualización de servidores</li>
-            <li>Contenedores con Docker</li>
-        </ul>
-
-        <h2 class="section-title">Proyectos</h2>
-        <div class="projects-grid">
-
-            <a href="https://github.com/JavierBernal06/crud-gestion-materiales-mina-java" class="project-card" target="_blank" rel="noopener">
-                <div class="project-header">
-                    <span class="project-icon">⛏️</span>
-                    <h3 class="project-title">Gestión de Materiales de Mina</h3>
-                </div>
-                <p class="project-desc">Sistema en Java para administrar el inventario de materiales de una mina mediante operaciones CRUD: alta, consulta, modificación y baja de registros.</p>
-                <div class="project-tags">
-                    <span class="tag">Java</span>
-                    <span class="tag">CRUD</span>
-                </div>
-            </a>
-
-            <a href="https://github.com/JavierBernal06/calculadora-coordenadas-java" class="project-card" target="_blank" rel="noopener">
-                <div class="project-header">
-                    <span class="project-icon">📐</span>
-                    <h3 class="project-title">Calculadora de Coordenadas</h3>
-                </div>
-                <p class="project-desc">Programa en Java que trabaja con coordenadas y realiza cálculos a partir de ellas.</p>
-                <div class="project-tags">
-                    <span class="tag">Java</span>
-                    <span class="tag">Matemáticas</span>
-                </div>
-            </a>
-
-            <a href="https://github.com/Joaquin-Davila/Men-de-funciones-iterativas-en-Java-" class="project-card" target="_blank" rel="noopener">
-                <div class="project-header">
-                    <span class="project-icon">🔁</span>
-                    <h3 class="project-title">Funciones Iterativas en Java</h3>
-                </div>
-                <p class="project-desc">Menú interactivo en Java que reúne distintas funciones resueltas con ciclos e iteraciones.</p>
-                <div class="project-tags">
-                    <span class="tag">Java</span>
-                    <span class="tag">Lógica</span>
-                </div>
-            </a>
-
-            <a href="https://github.com/Joaquin-Davila/Actividad-4-Generador-de-alumnos" class="project-card" target="_blank" rel="noopener">
-                <div class="project-header">
-                    <span class="project-icon">🎓</span>
-                    <h3 class="project-title">Generador de Alumnos BD</h3>
-                </div>
-                <p class="project-desc">Generador de registros de alumnos pensado para poblar y probar una base de datos.</p>
-                <div class="project-tags">
-                    <span class="tag">Base de Datos</span>
-                    <span class="tag">SQL</span>
-                </div>
-            </a>
-
-            <a href="https://github.com/Joaquin-Davila/Juego-del-Gato" class="project-card" target="_blank" rel="noopener">
-                <div class="project-header">
-                    <span class="project-icon">⭕</span>
-                    <h3 class="project-title">Juego del Gato en Java</h3>
-                </div>
-                <p class="project-desc">Versión del juego del gato (tres en línea) programada en Java, con turnos y detección de ganador.</p>
-                <div class="project-tags">
-                    <span class="tag">Java</span>
-                    <span class="tag">Lógica</span>
-                </div>
-            </a>
-
-        </div>
-
-        <!-- BLOGS -->
-        <h2 class="section-title">Blogs (Diseño UI & Prototipado)</h2>
-
-        <!-- Blog 1 -->
-        <div class="blog-post">
-            <div class="blog-content">
-                <h3>Prototipo UI: "Edukacion Mortal"</h3>
-
-                <h4>Descripción</h4>
-                <p>Diseño conceptual y maquetado de interfaz para un videojuego de peleas 2D en estilo pixel art, con personajes basados en estudiantes de preparatorias de Sonora, como el CBTIS. Incluye las pantallas de inicio, la selección de personajes, el menú (Jugar / Menú) y los escenarios de combate inspirados en las escuelas.</p>
-
-                <h4>Experiencia obtenida</h4>
-                <p>Definí una dirección de arte y una jerarquía visual donde el logotipo y los luchadores destacan sobre los fondos. Organicé las capas de sprites, la tipografía retro y los elementos del HUD en Canva para simular la vista real del juego.</p>
-
-                <h4>¿Cómo ayudó a mi desarrollo profesional?</h4>
-                <p>Me sirvió para planear el flujo de interacción de una interfaz antes de programarla y para presentar una idea de forma visual, como documento de referencia para una etapa de desarrollo.</p>
-
-                <a href="https://canva.link/2753ld1rcnxi7c6" class="btn-link" target="_blank" rel="noopener">Ver diseño en Canva</a>
-            </div>
-            <div class="blog-image">
-                <img src="edukacion.jpg" alt="Pantalla de inicio del juego Edukacion Mortal" onerror="this.style.display='none'">
-            </div>
-        </div>
-
-        <!-- Blog 2 -->
-        <div class="blog-post">
-            <div class="blog-content">
-                <h3>Prototipo Web: "Sonora Aventuras"</h3>
-
-                <h4>Descripción</h4>
-                <p>Diseño de una interfaz web para una plataforma turística del estado de Sonora, con viajes en autobús a los pueblos mágicos de la región. Cuenta con una interfaz de usuario y otra de administrador. El usuario explora destinos como el Desierto de Altar y Puerto Peñasco, consulta su próxima salida y accede a su boleto con código QR. La plataforma recomienda viajes en autobús y permite agendar el boleto y el hotel en un mismo proceso. El administrador gestiona paseos, autobuses y reservas.</p>
-
-                <h4>Experiencia obtenida</h4>
-                <p>Aprendí a distinguir los distintos tipos de usuario de un sistema y a diseñar una vista adecuada para cada uno. También practiqué la identificación de requerimientos, como reservar transporte y hospedaje juntos o administrar viajes, y su traducción en pantallas claras, con una navegación sencilla y un estilo visual coherente con la marca.</p>
-
-                <h4>¿Cómo ayudó a mi desarrollo profesional?</h4>
-                <p>Fue un ejercicio cercano al trabajo real de análisis y diseño de sistemas de información: entender qué necesita cada usuario, definir las funciones principales y presentarlas en un prototipo que se pueda revisar antes de desarrollar. Me sirvió para comunicar ideas de forma visual y para pensar en el sistema completo, no solo en el código.</p>
-            </div>
-            <div class="blog-image">
-                <img src="sonora-aventuras.jpg" alt="Interfaz web de Sonora Aventuras" onerror="this.style.display='none'">
-            </div>
-        </div>
-
     </main>
 
+    <footer>
+        <div class="wrap">© 2026 Joaquín Dávila Arenas</div>
+    </footer>
+
+    <script>
+        (function () {
+            var nav = document.getElementById('nav');
+            var progress = document.getElementById('progress');
+            var menuBtn = document.getElementById('menuBtn');
+            var links = document.getElementById('links');
+            var lastY = window.scrollY;
+            var ticking = false;
+
+            /* Barra superior: se oculta al bajar y reaparece al subir */
+            function onScroll() {
+                var y = window.scrollY;
+                var menuOpen = links.classList.contains('open');
+                if (y > lastY && y > 90 && !menuOpen) {
+                    nav.classList.add('hide');
+                } else {
+                    nav.classList.remove('hide');
+                }
+                lastY = y;
+
+                var max = document.documentElement.scrollHeight - window.innerHeight;
+                progress.style.transform = 'scaleX(' + (max > 0 ? y / max : 0) + ')';
+                ticking = false;
+            }
+            window.addEventListener('scroll', function () {
+                if (!ticking) { requestAnimationFrame(onScroll); ticking = true; }
+            }, { passive: true });
+            onScroll();
+
+            /* También reaparece al acercar el cursor al borde superior */
+            window.addEventListener('mousemove', function (e) {
+                if (e.clientY < 50) nav.classList.remove('hide');
+            }, { passive: true });
+
+            /* Menú en pantallas pequeñas */
+            menuBtn.addEventListener('click', function () {
+                var open = links.classList.toggle('open');
+                menuBtn.setAttribute('aria-expanded', open);
+            });
+            links.addEventListener('click', function (e) {
+                if (e.target.tagName === 'A') {
+                    links.classList.remove('open');
+                    menuBtn.setAttribute('aria-expanded', 'false');
+                }
+            });
+
+            /* Aparición de elementos al hacer scroll */
+            var reveals = document.querySelectorAll('.reveal');
+            if ('IntersectionObserver' in window) {
+                var io = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (en) {
+                        if (en.isIntersecting) {
+                            en.target.classList.add('in');
+                            io.unobserve(en.target);
+                        }
+                    });
+                }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+                reveals.forEach(function (el) { io.observe(el); });
+            } else {
+                reveals.forEach(function (el) { el.classList.add('in'); });
+            }
+
+            /* Enlace activo según la sección visible */
+            var sections = document.querySelectorAll('main section[id]');
+            var anchors = {};
+            document.querySelectorAll('.links a').forEach(function (a) {
+                anchors[a.getAttribute('href').slice(1)] = a;
+            });
+            if ('IntersectionObserver' in window) {
+                var so = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (en) {
+                        if (en.isIntersecting && anchors[en.target.id]) {
+                            Object.keys(anchors).forEach(function (k) { anchors[k].classList.remove('active'); });
+                            anchors[en.target.id].classList.add('active');
+                        }
+                    });
+                }, { rootMargin: '-45% 0px -50% 0px' });
+                sections.forEach(function (s) { so.observe(s); });
+            }
+
+            /* Botones para copiar */
+            document.querySelectorAll('.copy').forEach(function (btn) {
+                var original = btn.textContent;
+                btn.addEventListener('click', function () {
+                    var text = btn.getAttribute('data-copy');
+                    function done() {
+                        btn.textContent = 'Copiado';
+                        btn.classList.add('done');
+                        setTimeout(function () {
+                            btn.textContent = original;
+                            btn.classList.remove('done');
+                        }, 1800);
+                    }
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        navigator.clipboard.writeText(text).then(done, function () {});
+                    } else {
+                        var ta = document.createElement('textarea');
+                        ta.value = text;
+                        document.body.appendChild(ta);
+                        ta.select();
+                        try { document.execCommand('copy'); done(); } catch (err) {}
+                        document.body.removeChild(ta);
+                    }
+                });
+            });
+        })();
+    </script>
 </body>
 </html>
