@@ -10,7 +10,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
-        /* Paleta de la imagen de referencia, de más claro a más oscuro */
         :root {
             --mint-1: #cbe8dd;
             --mint-2: #a3e4cb;
@@ -52,7 +51,7 @@
 
         .wrap { width: min(1080px, 100% - 48px); margin-inline: auto; }
 
-        /* ---------- BARRA SUPERIOR (se oculta al bajar, reaparece al subir) ---------- */
+        /*BARRA SUPERIOR*/
         .nav {
             position: fixed;
             inset: 0 0 auto 0;
@@ -232,7 +231,7 @@
         .btn.ghost { color: var(--accent); }
         .btn.ghost:hover { background: var(--mint-1); }
 
-        /* ---------- FRANJA DE TECNOLOGÍAS ---------- */
+        /*FRANJA DE TECNOLOGÍAS*/
         .marquee {
             overflow: hidden;
             border-block: 1px solid var(--line);
@@ -255,7 +254,7 @@
         }
         @keyframes scroll { to { transform: translateX(-50%); } }
 
-        /* ---------- SECCIONES ---------- */
+        /*SECCIONES*/
         .section {
             display: grid;
             grid-template-columns: 200px 1fr;
@@ -297,7 +296,7 @@
         }
         .skills li:hover { background: var(--mint-1); border-color: var(--mint-4); }
 
-        /* Educación (es una secuencia, por eso va en línea de tiempo) */
+        /* Educación */
         .timeline { list-style: none; margin: 0; padding: 0 0 0 28px; position: relative; }
         .timeline::before {
             content: "";
@@ -697,7 +696,7 @@
     </main>
 
     <footer>
-        <div class="wrap">© 2026 Joaquín Dávila Arenas</div>
+        <div class="wrap">© 2026 Yo Merengues</div>
     </footer>
 
     <script>
