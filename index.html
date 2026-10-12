@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javier Bernal - Portafolio</title>
+    <style>
+        /* Variables de colores para un diseño moderno */
+        :root {
+            --sidebar-bg: #1a202c;
+            --sidebar-text: #e2e8f0;
+            --main-bg: #f7fafc;
+            --main-text: #2d3748;
+            --card-bg: #ffffff;
+            --accent-color: #3182ce;
+            --tag-bg: #ebf8ff;
+            --tag-text: #2b6cb0;
+        }
+
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            display: flex;
+            min-height: 100vh;
+            background-color: var(--main-bg);
+            color: var(--main-text);
+        }
+
+        /* --- BARRA LATERAL (IZQUIERDA) --- */
+        .sidebar {
+            width: 320px;
+            background-color: var(--sidebar-bg);
+            color: var(--sidebar-text);
+            padding: 50px 30px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            position: fixed;
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        .profile-header h1 {
+            margin: 0 0 5px 0;
+            font-size: 1.8em;
+            color: #ffffff;
+            letter-spacing: 0.5px;
+        }
+
+        .profile-header p {
+            margin: 0;
+            color: #a0aec0;
+            font-size: 0.95em;
+        }
+
+        .sidebar-section h3 {
+            font-size: 0.8em;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #718096;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #4a5568;
+            padding-bottom: 8px;
+        }
+
+        .sidebar-section p, .sidebar-section a {
+            font-size: 0.9em;
+            color: #cbd5e0;
+            margin: 5px 0;
+            text-decoration: none;
+            display: block;
+        }
+
+        .sidebar-section a:hover {
+            color: var(--accent-color);
+        }
+
+        .tech-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tech-pill {
+            background-color: #2d3748;
+            color: #e2e8f0;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+        }
+
+        /* --- CONTENIDO PRINCIPAL (DERECHA) --- */
+        .main-content {
+            margin-left: 320px;
+            padding: 60px 80px;
+            max-width: 1200px;
+            box-sizing: border-box;
+            flex: 1;
+        }
+
+        .main-title {
+            font-size: 3.5em;
+            font-weight: 800;
+            color: #1a202c;
+            margin: 0 0 30px 0;
+        }
+
+        .about-text {
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: #4a5568;
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            color: #2d3748;
+            margin-bottom: 25px;
+            margin-top: 50px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+        }
+
+        .skills-list {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 50px;
+        }
+
+        .skills-list li {
+            background-color: #e2e8f0;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 0.95em;
+            font-weight: 500;
+        }
+
+        /* --- CUADRICULA DE PROYECTOS --- */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+        }
+
+        .project-card {
+            background-color: var(--card-bg);
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 25px;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+            border-color: var(--accent-color);
+        }
+
+        .project-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .project-icon { font-size: 1.5em; }
+        .project-title { font-size: 1.2em; font-weight: 700; margin: 0; }
+        .project-desc { font-size: 0.95em; color: #718096; line-height: 1.6; margin-bottom: 20px; flex-grow: 1; }
+        .project-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; }
+        .tag { background-color: var(--tag-bg); color: var(--tag-text); padding: 4px 10px; border-radius: 6px; font-size: 0.75em; font-weight: 600; }
+
+        /* SECCIÓN BLOGS (NUEVO) */
+        .blog-post {
+            background-color: var(--card-bg);
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        @media (min-width: 900px) {
+            .blog-post { flex-direction: row; align-items: flex-start; }
+            .blog-content { flex: 2; }
+            .blog-image { flex: 1; text-align: center; }
+        }
+
+        .blog-post h3 {
+            margin: 0 0 15px 0;
+            font-size: 1.5em;
+            color: #2d3748;
+        }
+
+        .blog-post p {
+            color: #4a5568;
+            line-height: 1.7;
+            margin-bottom: 15px;
+            font-size: 0.95em;
+            text-align: justify;
+        }
+
+        .blog-post img {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 15px;
+        }
+
+        .btn-link {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9em;
+            transition: background-color 0.2s;
+        }
+
+        .btn-link:hover {
+            background-color: #2b6cb0;
+        }
+
+        /* Responsivo */
+        @media (max-width: 900px) {
+            body { flex-direction: column; }
+            .sidebar { width: 100%; position: relative; height: auto; padding: 40px 20px; }
+            .main-content { margin-left: 0; padding: 40px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- BARRA LATERAL -->
+    <aside class="sidebar">
+        <div class="profile-header">
+            <h1>Javier Bernal</h1>
+            <p>Ing. en Sistemas de Información</p>
+        </div>
+
+        <div class="sidebar-section">
+            <h3>Contacto</h3>
+            <p>📍 Hermosillo, Sonora</p>
+            <a href="https://github.com/JavierBernal06" target="_blank">🔗 github.com/JavierBernal06</a>
+        </div>
+
+        <div class="sidebar-section">
+            <h3>Tecnologías</h3>
+            <div class="tech-grid">
+                <span class="tech-pill">Python</span>
+                <span class="tech-pill">Java</span>
+                <span class="tech-pill">C++</span>
+                <span class="tech-pill">Flask</span>
+                <span class="tech-pill">SQL</span>
+                <span class="tech-pill">Docker</span>
+                <span class="tech-pill">VirtualBox</span>
+                <span class="tech-pill">Figma / Canva</span>
+            </div>
+        </div>
+
+        <div class="sidebar-section">
+            <h3>Formación</h3>
+            <p><strong>Ing. en Sistemas</strong></p>
+            <p>Universidad de Sonora</p>
+            <p style="color: #718096; font-size: 0.85em;">En curso</p>
+        </div>
+    </aside>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="main-content">
+        
+        <h1 class="main-title">Javier Bernal</h1>
+        
+        <p class="about-text">
+            Estudiante de Ingeniería en Sistemas apasionado por la creación de soluciones de software y la resolución de problemas técnicos. Me especializo en el desarrollo backend, diseño de bases de datos relacionales y la construcción de APIs RESTful. Tengo la capacidad de llevar proyectos desde su conceptualización hasta su implementación, combinando mis habilidades de programación con experiencia en administración de servidores, despliegue de contenedores y mantenimiento integral de hardware para entregar sistemas eficientes y robustos.
+        </p>
+
+        <h2 class="section-title">Habilidades</h2>
+        <ul class="skills-list">
+            <li>Desarrollo Backend y APIs (Flask)</li>
+            <li>Diseño de Bases de Datos Relacionales</li>
+            <li>Estructuras de Datos y Algoritmos</li>
+            <li>Despliegue y Virtualización</li>
+            <li>Mantenimiento preventivo/correctivo de Hardware</li>
+            <li>Resolución analítica de problemas</li>
+        </ul>
+
+        <h2 class="section-title">Proyectos</h2>
+        <div class="projects-grid">
+            
+            <a href="https://github.com/JavierBernal06/calculadora-coordenadas-java.git" class="project-card" target="_blank">
+                <div class="project-header">
+                    <span class="project-icon">📐</span>
+                    <h3 class="project-title">Calculadora de Coordenadas</h3>
+                </div>
+                <p class="project-desc">Programa en Java para la conversión de coordenadas entre sistemas polar y rectangular, además de realizar cálculos de distancias espaciales.</p>
+                <div class="project-tags">
+                    <span class="tag">Java</span>
+                    <span class="tag">Matemáticas</span>
+                </div>
+            </a>
+
+            <a href="https://github.com/JavierBernal06/introduccion-programacion-cpp.git" class="project-card" target="_blank">
+                <div class="project-header">
+                    <span class="project-icon">💻</span>
+                    <h3 class="project-title">Introducción a la Programación</h3>
+                </div>
+                <p class="project-desc">Programa básico en C++ diseñado para calcular el total a pagar con IVA incluido y validar procesos de envíos.</p>
+                <div class="project-tags">
+                    <span class="tag">C++</span>
+                    <span class="tag">Lógica</span>
+                </div>
+            </a>
+
+            <a href="https://github.com/JavierBernal06/api-sensores-telemetria-flask.git" class="project-card" target="_blank">
+                <div class="project-header">
+                    <span class="project-icon">📡</span>
+                    <h3 class="project-title">API Sensores Telemetría</h3>
+                </div>
+                <p class="project-desc">API desarrollada en Python utilizando el framework Flask para el monitoreo constante y almacenamiento de datos de telemetría IoT.</p>
+                <div class="project-tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">Flask</span>
+                    <span class="tag">IoT</span>
+                </div>
+            </a>
+
+            <a href="https://github.com/JavierBernal06/crud-gestion-materiales-mina-java.git" class="project-card" target="_blank">
+                <div class="project-header">
+                    <span class="project-icon">⛏️</span>
+                    <h3 class="project-title">Gestión de Materiales de Mina</h3>
+                </div>
+                <p class="project-desc">Sistema informático para administrar inventarios mineros de manera eficiente mediante operaciones CRUD, desarrollado enteramente en Java.</p>
+                <div class="project-tags">
+                    <span class="tag">Java</span>
+                    <span class="tag">Base de Datos</span>
+                </div>
+            </a>
+
+        </div>
+
+        <!-- SECCIÓN DE BLOGS -->
+        <h2 class="section-title">Blogs (Diseño UI & Prototipado)</h2>
+
+        <!-- Proyecto Canva 1 -->
+        <div class="blog-post">
+            <div class="blog-content">
+                <h3>Prototipo UI: "Edukacion Mortal"</h3>
+                <p>Este proyecto consiste en el diseño conceptual, creación de assets y maquetado de interfaz para un videojuego de peleas 2D en estilo pixel art, protagonizado por personajes basados en estudiantes de preparatorias de Sonora, como el CBTIS.</p>
+                
+                <p>El objetivo principal fue establecer una dirección de arte clara y diseñar los flujos de interacción del usuario, abarcando desde las pantallas de selección y menús de inicio hasta los escenarios de combate que reflejaran la identidad local.</p>
+                
+                <p>Para abordar esto, se planificó una arquitectura de información sencilla orientada a consolas y PC. Se conceptualizó la disposición de los botones interactivos (Jugar / Menú) y se estructuró la jerarquía visual para que el logotipo y los luchadores destacaran sobre los fondos detallados de las escuelas.</p>
+                
+                <p>La construcción gráfica y el ensamblaje de los componentes visuales se llevaron a cabo utilizando Canva. Mediante esta herramienta, se organizaron las capas de los sprites, la tipografía retro y los elementos del HUD para simular la vista real del motor de juego.</p>
+                
+                <p>El resultado es un mockup inmersivo y altamente detallado que visualiza con éxito la experiencia de usuario y la estética final del juego, sirviendo como un documento visual definitivo para la futura etapa de programación y desarrollo técnico.</p>
+                
+                <!-- Enlace de Canva actualizado -->
+                <a href="https://canva.link/2753ld1rcnxi7c6" class="btn-link" target="_blank">Ver diseño en Canva</a>
+            </div>
+            <div class="blog-image">
+                <img src="edukacion.jpg" alt="Pantalla de inicio del juego Edukacion Mortal">
+            </div>
+        </div>
+
+        <!-- Proyecto Canva 2 -->
+        <div class="blog-post">
+            <div class="blog-content">
+                <h3>Prototipo App Móvil: "Casita Deletreo"</h3>
+                <p>Este trabajo se centra en el diseño de interfaz de usuario (UI) para una aplicación móvil educativa e interactiva orientada al público infantil, diseñada para facilitar el aprendizaje de la ortografía mediante mecánicas gamificadas en entornos naturales.</p>
+                
+                <p>Se requería crear una experiencia móvil altamente visual y amigable que mantuviera la atención de los niños. Fue indispensable incluir un sistema de progresión de niveles, mecánicas de recompensas con monedas virtuales y opciones de personalización (tienda).</p>
+                
+                <p>La solución se diseñó en torno a un flujo de navegación intuitivo basado en botones grandes, iconografía clara y colores vibrantes. Se definió la pantalla principal ("Mi Casita") integrando personajes guía, como un búho, para hacer la navegación más interactiva y menos confusa para usuarios de temprana edad.</p>
+                
+                <p>El prototipo fue implementado visualmente estructurando los *wireframes* y maquetas finales en Canva. Se dimensionaron los elementos para pantallas móviles y se definieron las áreas táctiles de botones como "¡Jugar!" y "Tienda", asegurando proporciones ergonómicas.</p>
+                
+                <p>Al finalizar, se entregó un diseño de interfaz pulido y funcional a nivel visual que demuestra claramente cómo los niños interactuarán con la aplicación educativa, facilitando la transición del concepto gráfico hacia el desarrollo de frontend móvil.</p>
+                
+                <!-- Enlace de Canva actualizado -->
+                <a href="https://canva.link/lhi3ast5ip0vwt6" class="btn-link" target="_blank">Ver diseño en Canva</a>
+            </div>
+            <div class="blog-image">
+                <img src="casita.jpg" alt="Interfaz móvil del juego Casita Deletreo">
+            </div>
+        </div>
+
+    </main>
+
+</body>
+</html>
