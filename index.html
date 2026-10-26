@@ -51,7 +51,7 @@
 
         .wrap { width: min(1080px, 100% - 48px); margin-inline: auto; }
 
-        /*BARRA SUPERIOR*/
+        /* ---------- BARRA SUPERIOR ---------- */
         .nav {
             position: fixed;
             inset: 0 0 auto 0;
@@ -231,14 +231,12 @@
         .btn.ghost { color: var(--accent); }
         .btn.ghost:hover { background: var(--mint-1); }
 
-        /*FRANJA DE TECNOLOGÍAS*/
+        /* ---------- FRANJA DE TECNOLOGÍAS ---------- */
         .marquee {
             overflow: hidden;
             border-block: 1px solid var(--line);
             padding: 18px 0;
             background: rgba(203, 232, 221, 0.35);
-            display: flex;
-            white-space: nowrap;
         }
         .track {
             display: flex;
@@ -256,7 +254,7 @@
         }
         @keyframes scroll { to { transform: translateX(-50%); } }
 
-        /*SECCIONES*/
+        /* ---------- SECCIONES ---------- */
         .section {
             display: grid;
             grid-template-columns: 200px 1fr;
@@ -294,18 +292,11 @@
             font-weight: 500;
             color: var(--ink);
             background: #fff;
-            transition: background-color 0.25s, border-color 0.25s, transform 0.2s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            transition: background-color 0.25s, border-color 0.25s;
         }
-        .skills li:hover { 
-            background: var(--mint-1); 
-            border-color: var(--mint-4); 
-            transform: scale(1.05); 
-        }
+        .skills li:hover { background: var(--mint-1); border-color: var(--mint-4); }
 
-        /* Educación */
+        /* Educación (es una secuencia, por eso va en línea de tiempo) */
         .timeline { list-style: none; margin: 0; padding: 0 0 0 28px; position: relative; }
         .timeline::before {
             content: "";
@@ -375,38 +366,9 @@
             border-radius: 14px;
             overflow: hidden;
             background: linear-gradient(135deg, var(--mint-1), var(--mint-3));
-            position: relative;
         }
-        .blog figure img { 
-            width: 100%; 
-            height: 100%; 
-            object-fit: cover; 
-            display: block; 
-        }
-        .blog figure a {
-            display: block;
-            width: 100%;
-            height: 100%;
-            text-decoration: none;
-        }
-        .blog figure a::after {
-            content: "🔍 Ver imagen en grande";
-            position: absolute;
-            inset: 0;
-            background: rgba(18, 63, 55, 0.7);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: var(--display);
-            font-weight: 700;
-            font-size: 1.25rem;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        .blog figure a:hover::after {
-            opacity: 1;
-        }
+        .blog figure img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.8s ease; }
+        .blog figure:hover img { transform: scale(1.03); }
         .blog h3 { margin: 0 0 28px; font-family: var(--display); font-weight: 800; font-size: clamp(1.7rem, 4vw, 2.3rem); line-height: 1.15; letter-spacing: -0.02em; }
 
         .steps { list-style: none; margin: 0; padding: 0; counter-reset: step; }
@@ -467,7 +429,19 @@
             transition-delay: calc(var(--i, 0) * 80ms);
         }
         .js .reveal.in { opacity: 1; transform: none; }
-        
+
+        /* Movimiento reducido */
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after { animation: none !important; transition: none !important; }
+            .js .reveal { opacity: 1; transform: none; }
+            .timeline::before { transform: scaleY(1); }
+            .swap { display: block; }
+            .swap .r1, .swap .r2 { opacity: 1; transform: none; }
+            .swap .r2::before { content: " o "; }
+            .swap span { display: inline; }
+            .track { flex-wrap: wrap; width: auto; padding: 0 24px; }
+        }
     </style>
 </head>
 <body>
@@ -508,6 +482,7 @@
                 <div class="hero-links rise" style="--d:.45s">
                     <a class="btn fill" href="#proyectos">Ver proyectos</a>
                     <a class="btn ghost" href="#contacto">Contactarme</a>
+                    <a class="btn ghost" href="CV_Joaquin_Davila_Arenas.docx" download="CV_Joaquin_Davila_Arenas.docx">Descargar CV</a>
                 </div>
             </div>
         </section>
@@ -515,8 +490,6 @@
         <!-- TECNOLOGÍAS -->
         <div class="marquee" aria-label="Tecnologías: Python, Java, Flask, SQL, Docker, VirtualBox, Canva y redes WLAN">
             <div class="track" aria-hidden="true">
-                <span>Python</span><span>Java</span><span>Flask</span><span>SQL</span><span>Docker</span><span>VirtualBox</span><span>Canva</span><span>Redes WLAN</span>
-                <span>Python</span><span>Java</span><span>Flask</span><span>SQL</span><span>Docker</span><span>VirtualBox</span><span>Canva</span><span>Redes WLAN</span>
                 <span>Python</span><span>Java</span><span>Flask</span><span>SQL</span><span>Docker</span><span>VirtualBox</span><span>Canva</span><span>Redes WLAN</span>
                 <span>Python</span><span>Java</span><span>Flask</span><span>SQL</span><span>Docker</span><span>VirtualBox</span><span>Canva</span><span>Redes WLAN</span>
             </div>
@@ -537,12 +510,12 @@
             <section class="section" id="habilidades">
                 <h2 class="reveal">Habilidades</h2>
                 <ul class="skills">
-                    <li class="reveal" style="--i:1">🏠 Configuración de redes domésticas</li>
-                    <li class="reveal" style="--i:2">📶 Redes inalámbricas WLAN</li>
-                    <li class="reveal" style="--i:3">🎨 Diseño de interfaces front end</li>
-                    <li class="reveal" style="--i:4">🗄️ Desarrollo de bases de datos (SQL)</li>
-                    <li class="reveal" style="--i:5">🖥️ Virtualización de servidores</li>
-                    <li class="reveal" style="--i:6">🐳 Contenedores con Docker</li>
+                    <li class="reveal" style="--i:1">Configuración de redes domésticas</li>
+                    <li class="reveal" style="--i:2">Redes inalámbricas WLAN</li>
+                    <li class="reveal" style="--i:3">Diseño de interfaces front end</li>
+                    <li class="reveal" style="--i:4">Desarrollo de bases de datos (SQL)</li>
+                    <li class="reveal" style="--i:5">Virtualización de servidores</li>
+                    <li class="reveal" style="--i:6">Contenedores con Docker</li>
                 </ul>
             </section>
 
@@ -630,9 +603,7 @@
 
                     <article class="blog reveal">
                         <figure>
-                            <a href="edukacion.png" target="_blank" title="Abrir imagen completa">
-                                <img src="edukacion.png" alt="Pantalla de inicio del juego Edukacion Mortal" onerror="this.style.display='none'">
-                            </a>
+                            <img src="edukacion.jpg" alt="Pantalla de inicio del juego Edukacion Mortal" onerror="this.style.display='none'">
                         </figure>
                         <h3>Prototipo UI: "Edukacion Mortal"</h3>
                         <ol class="steps">
@@ -662,9 +633,7 @@
 
                     <article class="blog reveal">
                         <figure>
-                            <a href="sonora-aventuras.png" target="_blank" title="Abrir imagen completa">
-                                <img src="sonora-aventuras.png" alt="Interfaz web de Sonora Aventuras" onerror="this.style.display='none'">
-                            </a>
+                            <img src="sonora-aventuras.jpg" alt="Interfaz web de Sonora Aventuras" onerror="this.style.display='none'">
                         </figure>
                         <h3>Prototipo Web: "Sonora Aventuras"</h3>
                         <ol class="steps">
@@ -687,7 +656,6 @@
                             <li>
                                 <h4>¿Cuál fue el resultado?</h4>
                                 <p>Un prototipo con las dos interfaces que permite revisar el flujo completo antes de desarrollar. Con este proyecto aprendí a distinguir tipos de usuario, a diseñar una vista para cada uno y a pensar en el sistema completo, no solo en el código.</p>
-                                <p style="margin-top:14px"><a class="btn fill" href="https://canva.link/ilgng7enjcbvq00" target="_blank" rel="noopener">Ver diseño en Canva</a></p>
                             </li>
                         </ol>
                     </article>
@@ -721,6 +689,13 @@
                                 <a class="value" href="https://github.com/Joaquin-Davila" target="_blank" rel="noopener">github.com/Joaquin-Davila</a>
                             </div>
                         </div>
+                        <div class="contact-item reveal" style="--i:4">
+                            <div>
+                                <small>Currículum</small>
+                                <a class="value" href="CV_Joaquin_Davila_Arenas.docx" download="CV_Joaquin_Davila_Arenas.docx">CV_Joaquin_Davila_Arenas.docx</a>
+                            </div>
+                            <a class="btn fill" href="CV_Joaquin_Davila_Arenas.docx" download="CV_Joaquin_Davila_Arenas.docx">Descargar CV</a>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -729,7 +704,7 @@
     </main>
 
     <footer>
-        <div class="wrap">© 2026 Yo Merengues</div>
+        <div class="wrap">© 2026 Joaquín Dávila Arenas</div>
     </footer>
 
     <script>
